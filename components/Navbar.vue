@@ -15,19 +15,30 @@
         viewBox="0 0 24 24"
         stroke="currentColor"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        />
       </svg>
       <svg
         class="w-6 h-6 text-gray-700 absolute transition-transform duration-300"
-        :class="{ 'rotate-180 opacity-100': isMenuOpen, 'opacity-0': !isMenuOpen }"
+        :class="{
+          'rotate-180 opacity-100': isMenuOpen,
+          'opacity-0': !isMenuOpen,
+        }"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M6 18L18 6M6 6l12 12" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
       </svg>
     </button>
 
@@ -65,6 +76,9 @@
         >
           {{ label }}
         </NuxtLink>
+        <NuxtLink class="px-3 font-semibold text-indigo-700">
+          Войти
+        </NuxtLink>
       </nav>
     </transition>
 
@@ -75,15 +89,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from "vue"
 
-defineProps<{ activeLinkName: string }>();
+defineProps<{ activeLinkName: string }>()
 
-const isMenuOpen = ref(false);
+const isMenuOpen = ref(false)
 
 interface PageLink {
-  label: string;
-  name: string;
+  label: string
+  name: string
 }
 
 const pageLinks: PageLink[] = [
@@ -92,5 +106,5 @@ const pageLinks: PageLink[] = [
   { label: "Видео", name: "videos" },
   { label: "Организации", name: "organizations" },
   { label: "Сообщество", name: "community" },
-];
+]
 </script>
