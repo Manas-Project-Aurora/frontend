@@ -1,6 +1,6 @@
 <template>
   <header class="flex items-center justify-between h-16 px-4 md:px-8 relative">
-    <NuxtLink class="text-2xl font-bold">Aurora</NuxtLink>
+    <NuxtLink class="text-2xl font-bold hover:cursor-pointer" :to="{ name: 'index' }">Aurora</NuxtLink>
 
     <!-- Burger Icon (Mobile) -->
     <button
@@ -76,14 +76,14 @@
         >
           {{ label }}
         </NuxtLink>
-        <NuxtLink class="px-3 font-semibold text-indigo-700">
+        <NuxtLink class="px-3 font-semibold text-indigo-700" :to="{name: 'auth-logn'}">
           Войти
         </NuxtLink>
       </nav>
     </transition>
 
-    <NuxtLink class="hidden md:block px-3 font-semibold text-indigo-700">
-      Войти
+    <NuxtLink class="hidden md:block px-3 font-semibold text-indigo-700" :to="{name: 'auth-login'}">
+       Войти
     </NuxtLink>
   </header>
 </template>
