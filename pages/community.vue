@@ -1,14 +1,17 @@
 <template>
   <div>
-    <section v-for="{ title, items, backgroundColor } in itemsGroups" :key="title" class="mb-10">
+    <section v-for="{ title, items, backgroundColor, icon } in itemsGroups" :key="title" class="mb-10">
       <h4 class="text-2xl mb-4 mt-8 font-semibold text-gray-400">
         {{ title }}
       </h4>
       <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
-        <a v-for="item in items" :href="item.url">
+        <a v-for="item in items" :href="item.url" class="flex items-center bg-blue-500 text-white font-semibold rounded-md">
+          <div class="flex justify-center">
+            <img :src="icon" alt="Logo" class="w-12 h-12 rounded-l-md">
+          </div>
           <div
             :class="backgroundColor"
-            class="text-white font-semibold px-3 py-4"
+            class="text-white font-semibold px-3 py-3 w-full"
           >
             {{ item.title }}
           </div>
@@ -19,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+const iconSrc = "/icons/telegram.png";
+
 interface CommunityLinkItem {
   title: string
   url: string
@@ -27,161 +32,168 @@ interface CommunityLinkItem {
 interface CommunityLinkItemGroup {
   title: string
   backgroundColor: string
+  icon: string
   items: CommunityLinkItem[]
 }
 
 const itemsGroups: CommunityLinkItemGroup[] = [
   {
-    title: "Наши ресурсы в Telegram",
+    title: "Телебаза: чат, где код превращается в ахахахах",
     backgroundColor: "bg-blue-400",
+    icon: "/icons/resources.png",
     items: [
       {
-        title: "Общий чат",
+        title: "Vue, где мои права?",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Кодим через боль",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Сломал? Да кто бы сомневался!",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Ты это деплоил?",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Vue, **банька** и паника",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "JS без боли (ну почти)",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Кодовые запойчики",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Где мои `;`, **сука**?",
         url: "https://t.me/ru_vuejs",
       },
     ],
   },
   {
-    title: "Telegram чаты",
+    title: "Чатостроение и Vue-страдания",
     backgroundColor: "bg-sky-300",
+    icon: "/icons/telegram.png",
     items: [
       {
-        title: "Общий чат",
+        title: "Где баги, там и мы, бл**ть",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Vue, баги и отчаяние",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "TypeScript? Нет, спасибо",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Чатик, где все ноют",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Вопрос-ответ-паника",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Кофе, код и лютый **п***ец",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Вечерний кодинг и алкостек",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "1001 способ убить Vue",
         url: "https://t.me/ru_vuejs",
       },
     ],
   },
   {
-    title: "Веб сайты",
+    title: "Интернет! Интернет! Где мой sanity check?!",
     backgroundColor: "bg-green-300",
+    icon: "/icons/internet.png",
     items: [
       {
-        title: "Общий чат",
+        title: "Главный сайт, но он падает",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "npm-пакет, которого нет",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "HTML, CSS и WTF",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Веб катится в ж*пу",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Кроссбраузерные страдания",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "SEO, но не через задницу",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Fullstack: мы все тут страдаем",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Web 3.0 – развод века?",
         url: "https://t.me/ru_vuejs",
       },
     ],
   },
   {
-    title: "YouTube",
+    title: "VueTube: баги, паника, алкостримы",
     backgroundColor: "bg-red-400",
+    icon: "/icons/youtube.png",
     items: [
       {
-        title: "Общий чат",
+        title: "Баги в прямом эфире, ахахах",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Как не заснуть на **ебинаре**",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Разбор кода (и психики)",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "JS-треш на стримах (цензура?)",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Дебаг в 4K, но боль в 8K",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Vue: разбор полетов без парашюта",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Frontend-кулинария: рецепт боли",
         url: "https://t.me/ru_vuejs",
       },
       {
-        title: "Общий чат",
+        title: "Ютубчек для тех, кто не пишет тесты",
         url: "https://t.me/ru_vuejs",
       },
     ],
   },
-]
+];
+
+
 </script>
