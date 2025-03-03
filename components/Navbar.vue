@@ -1,5 +1,6 @@
 <template>
-  <header class="flex items-center justify-between h-16 px-4 md:px-8 relative">
+  <div class="flex justify-center items-center">
+  <header class="flex items-center w-7xl justify-between h-16 px-4 md:px-8 relative">
     <NuxtLink
       class="text-2xl font-bold hover:cursor-pointer"
       :to="{ name: 'index' }"
@@ -96,6 +97,7 @@
       Войти
     </NuxtLink>
   </header>
+</div>
 </template>
 
 <script setup lang="ts">
