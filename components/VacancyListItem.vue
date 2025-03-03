@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 flex justify-between px-6 py-4">
+  <div class="bg-gray-100 px-4 py-3 flex items-center justify-between rounded-md hover:cursor-pointer">
     <VacancyListItemSection
       title="Компания"
       :content="vacancy.organization_name"
