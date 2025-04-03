@@ -13,7 +13,7 @@
       />
       <div class="flex flex-col">
         <span class="text-xs text-gray-500">Компания</span>
-        <span class="font-semibold">
+        <span class="font-semibold text-black">
           {{ organization.name }}
         </span>
       </div>
