@@ -32,9 +32,18 @@ import { useRouter } from 'vue-router';
 import DataView from 'primevue/dataview';
 import OrganizationListItem from "./OrganizationListItem.vue";
 
-defineProps<{ organizations: any[] }>();
-const router = useRouter();
+interface Organization {
+  id: number;
+  name: string;
+  logo?: string;
+  vacanciesCount: number;
+  eventsCount: number;
+  videoCount: number;
+}
 
+defineProps<{ organizations: Organization[] }>();
+
+const router = useRouter();
 const goToDetail = (id: number) => {
   console.log("Переход к организации ID:", id);
   router.push(`/organizations/${id}`);
