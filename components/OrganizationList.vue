@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { navigateTo } from '#app'; // Для использования navigateTo в Nuxt 3
 import DataView from 'primevue/dataview';
 import OrganizationListItem from "./OrganizationListItem.vue";
 
@@ -43,9 +43,9 @@ interface Organization {
 
 defineProps<{ organizations: Organization[] }>();
 
-const router = useRouter();
 const goToDetail = (id: number) => {
   console.log("Переход к организации ID:", id);
-  router.push(`/organizations/${id}`);
+  // Используем navigateTo для перехода по имени маршрута с параметром id
+  navigateTo({ name: 'organizations-id', params: { id } });
 };
 </script>
