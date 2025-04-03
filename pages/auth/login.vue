@@ -15,13 +15,17 @@
 <script setup lang="ts">
 import type { LoginFormSubmitEvent } from "~/types/login"
 
+const isLoggedIn = useState("isLoggedIn", () => false)
+
 const toast = useToast()
 
-const onLogin = (event: LoginFormSubmitEvent) => {
+const onLogin = async (event: LoginFormSubmitEvent) => {
   toast.add({
     severity: "success",
     summary: "Вы успешно вошли в систему",
     life: 5000,
   })
+  isLoggedIn.value = true
+  await navigateTo({ name: 'vacancies' })
 }
 </script>

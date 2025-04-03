@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-between h-dvh">
+    <Navbar />
     <div class="container mx-auto">
-      <Navbar />
       <slot></slot>
     </div>
     <Footer />
