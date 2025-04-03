@@ -14,7 +14,6 @@
         <InputText type="email" fluid id="email" />
         <label for="email">Email</label>
       </FloatLabel>
-
       <Message
         v-if="$field?.invalid"
         severity="error"
@@ -23,6 +22,7 @@
         >{{ $field.error.message }}</Message
       >
     </FormField>
+
     <FormField v-slot="$field" name="password">
       <FloatLabel variant="on">
         <Password fluid :feedback="false" input-id="password" toggle-mask />
@@ -36,12 +36,38 @@
         >{{ $field.error.message }}</Message
       >
     </FormField>
-    <Button type="submit" severity="primary" label="Войти" icon="pi pi-check" />
-    <NuxtLink :to="{ name: 'auth-register' }">
+
+    <FormField v-slot="$field" name="confirmPassword">
+      <FloatLabel variant="on">
+        <Password
+          fluid
+          :feedback="false"
+          input-id="confirmPassword"
+          toggle-mask
+        />
+        <label for="confirmPassword">Подтвердите пароль</label>
+      </FloatLabel>
+      <Message
+        v-if="$field?.invalid"
+        severity="error"
+        size="small"
+        variant="simple"
+        >{{ $field.error.message }}</Message
+      >
+    </FormField>
+
+    <Button
+      type="submit"
+      severity="primary"
+      label="Зарегистрироваться"
+      icon="pi pi-user-plus"
+      fluid
+    />
+    <NuxtLink :to="{ name: 'auth-login' }">
       <Button
         severity="secondary"
-        label="Впервые у нас?"
-        icon="pi pi-user-plus"
+        label="Уже есть аккаунт?"
+        icon="pi pi-user"
         fluid
       />
     </NuxtLink>
@@ -52,19 +78,23 @@
 import { z } from "zod"
 import { zodResolver } from "@primevue/forms/resolvers/zod"
 import type { FormSubmitEvent } from "@primevue/forms"
-import type { LoginFormSubmitEvent } from "~/types/login"
+import type { RegisterFormSubmitEvent } from "~/types/register"
 
-const emit = defineEmits<{
-  submit: [event: LoginFormSubmitEvent]
-}>()
+const emit = defineEmits<{ submit: [event: RegisterFormSubmitEvent] }>()
 
 const resolver = ref(
   zodResolver(
     z.object({
-      email: z.string({ message: "Введите ваш email " }).email(),
+      email: z.string({ message: "Введите ваш email" }).email(),
       password: z
         .string({ message: "Введите ваш пароль" })
         .min(8, { message: "Пароль должен содержать минимум 8 символов" }),
+      confirmPassword: z
+        .string({ message: "Подтвердите ваш пароль" })
+        .min(8, { message: "Пароль должен содержать минимум 8 символов" })
+        .refine((val, ctx) => val === ctx.parent.password, {
+          message: "Пароли не совпадают",
+        }),
     })
   )
 )
