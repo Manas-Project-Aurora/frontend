@@ -54,7 +54,9 @@ const resolver = ref(
   zodResolver(
     z.object({
       email: z.string({ message: "Введите ваш email " }).email(),
-      password: z.string({ message: "Введите ваш пароль" }).min(8),
+      password: z
+        .string({ message: "Введите ваш пароль" })
+        .min(8, { message: "Пароль должен содержать минимум 8 символов" }),
     })
   )
 )
