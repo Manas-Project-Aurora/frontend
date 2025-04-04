@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { navigateTo } from '#app'; // Для использования navigateTo в Nuxt 3
 import DataView from 'primevue/dataview';
 import OrganizationListItem from "./OrganizationListItem.vue";
 
