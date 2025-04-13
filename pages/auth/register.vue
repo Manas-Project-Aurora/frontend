@@ -16,12 +16,24 @@
 import type { RegisterFormSubmitEvent } from "~/types/register"
 
 const toast = useToast()
+const { register } = useAuth()
 
-const onRegister = (event: RegisterFormSubmitEvent) => {
-  toast.add({
-    severity: "success",
-    summary: "Вы успешно вошли в систему",
-    life: 5000,
-  })
+const onRegister = async (event: RegisterFormSubmitEvent) => {
+  const isSuccess = await register(event.email, event.password)
+  if (isSuccess) {
+    toast.add({
+      severity: "success",
+      summary: "Вы успешно зарегистрировались",
+      life: 5000,
+    })
+    await navigateTo({ name: "index" })
+  } else {
+    toast.add({
+      severity: "error",
+      summary: "Ошибка регистрации",
+      detail: "Пожалуйста, проверьте введенные данные.",
+      life: 5000,
+    })
+  }
 }
 </script>

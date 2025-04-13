@@ -92,9 +92,9 @@ const resolver = ref(
       confirmPassword: z
         .string({ message: "Подтвердите ваш пароль" })
         .min(8, { message: "Пароль должен содержать минимум 8 символов" })
-        .refine((val, ctx) => val === ctx.parent.password, {
-          message: "Пароли не совпадают",
-        }),
+        // .refine((val, ctx) => val === ctx.password, {
+        //   message: "Пароли не совпадают",
+        // }),
     })
   )
 )

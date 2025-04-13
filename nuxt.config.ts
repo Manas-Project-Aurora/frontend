@@ -13,6 +13,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.NUXT_API_BASE_URL,
+    },
+  },
   css: ["~/assets/css/main.css", "primeicons/primeicons.css"],
   modules: ["@primevue/nuxt-module"],
   primevue: {

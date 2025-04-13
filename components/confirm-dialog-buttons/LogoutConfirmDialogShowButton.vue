@@ -13,7 +13,7 @@
 <script setup lang="ts">
 const confirm = useConfirm()
 
-const isLoggedIn = useState("isLoggedIn", (): boolean => false)
+const { logout } = useAuth()
 
 const onClick = (): void => {
   confirm.require({
@@ -25,7 +25,7 @@ const onClick = (): void => {
       severity: "danger",
     },
     async accept() {
-      isLoggedIn.value = false
+      await logout()
       await navigateTo({ name: "auth-login" })
     },
     rejectProps: {

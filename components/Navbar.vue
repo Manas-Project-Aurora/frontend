@@ -51,7 +51,7 @@ interface Item {
 
 const route = useRoute()
 
-const isLoggedIn = useState("isLoggedIn", () => false)
+const { isLoggedIn } = useAuth()
 
 const items: Item[] = [
   {

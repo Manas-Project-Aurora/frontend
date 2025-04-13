@@ -19,13 +19,24 @@ const isLoggedIn = useState("isLoggedIn", () => false)
 
 const toast = useToast()
 
+const { login } = useAuth()
+
 const onLogin = async (event: LoginFormSubmitEvent) => {
-  toast.add({
-    severity: "success",
-    summary: "Вы успешно вошли в систему",
-    life: 5000,
-  })
-  isLoggedIn.value = true
-  await navigateTo({ name: 'vacancies' })
+  const isSuccess = await login(event.email, event.password)
+  if (isSuccess) {
+    toast.add({
+      severity: "success",
+      summary: "Вы успешно вошли в систему",
+      life: 5000,
+    })
+    await navigateTo({ name: "index" })
+  } else {
+    toast.add({
+      severity: "error",
+      summary: "Ошибка аутентифицации",
+      detail: "Пожалуйста, проверьте введенные данные.",
+      life: 5000,
+    })
+  }
 }
 </script>
