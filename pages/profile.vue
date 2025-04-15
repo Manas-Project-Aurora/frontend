@@ -20,9 +20,18 @@
         <OrganizationListDataView
           :organization-list-response="organizationListResponse!"
         />
-        <Button label="Создать организацию" icon="pi pi-plus" size="small" />
+        <Button
+          @click="isOrganizationCreateDialogVisible = true"
+          label="Создать организацию"
+          icon="pi pi-plus"
+          size="small"
+        />
       </section>
     </div>
+
+    <OrganizationCreateDialog
+      v-model:visible="isOrganizationCreateDialogVisible"
+    />
   </div>
 </template>
 
@@ -52,4 +61,6 @@ const { data: organizationListResponse, status: organizationListStatus } =
     take: 5,
     skip: 0,
   })
+
+const isOrganizationCreateDialogVisible = ref<boolean>(false)
 </script>
