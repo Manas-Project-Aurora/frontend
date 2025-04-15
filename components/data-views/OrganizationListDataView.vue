@@ -3,10 +3,10 @@
     <template
       #list="{ items: organizations }: { items: OrganizationListItem[] }"
     >
-      <div class="flex flex-col gap-y-4 my-4">
+      <div class="flex flex-col gap-y-4">
         <Card v-for="organization in organizations">
           <template #content>
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-start gap-y-4 sm:items-center flex-col sm:flex-row ">
               <div class="flex gap-x-4 items-center">
                 <NuxtImg
                   :src="organization.logo_url"

@@ -1,5 +1,4 @@
 <template>
-  <!-- <Menubar :model="items"/> -->
   <Menubar :model="items">
     <template #item="{ item, props }">
       <NuxtLink :to="{ name: item.pageName }">
@@ -37,7 +36,18 @@
           />
         </NuxtLink>
       </template>
-      <LogoutConfirmDialogShowButton v-else />
+      <template v-else>
+        <NuxtLink :to="{ name: 'profile' }">
+          <Button
+            label="Профиль"
+            icon="pi pi-user"
+            text
+            severity="contrast"
+            size="small"
+          />
+        </NuxtLink>
+        <LogoutConfirmDialogShowButton />
+      </template>
     </template>
   </Menubar>
 </template>

@@ -2,7 +2,7 @@
   <DataView :value="vacancyListResponse.vacancies" data-key="id">
     <template #list="{ items: vacancies }: { items: VacancyListItem[] }">
       <Card v-for="vacancy in vacancies">
-        <template #title>{{ vacancy.title }}</template>
+        <template #title><span class="text-lg">{{ vacancy.title }}</span></template>
         <template #subtitle>
           <SalaryDetail
             :salary-from="vacancy.salary_from"
@@ -12,7 +12,7 @@
         </template>
         <template #content>
           <section>
-            <p>Компания: {{ vacancy.organization_name }}</p>
+            <p class="text-md">Компания: {{ vacancy.organization_name }}</p>
           </section>
         </template>
       </Card>
