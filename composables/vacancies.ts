@@ -1,15 +1,17 @@
-import type { VacancyListResponse } from "~/types/vacancy"
+import type { VacancyListResponse, VacancyStatus } from "~/types/vacancy"
 
 interface VacancyListRequestParams {
   take?: number
   skip?: number
   userIds?: number[]
+  statuses?: VacancyStatus[]
 }
 
 export const useVacancyList = ({
   take,
   skip,
   userIds,
+  statuses,
 }: VacancyListRequestParams = {}) => {
   const runtimeConfig = useRuntimeConfig()
 
@@ -17,6 +19,6 @@ export const useVacancyList = ({
   return useFetch<VacancyListResponse>(url, {
     method: "GET",
     credentials: "include",
-    query: { take, skip, user_ids: userIds },
+    query: { take, skip, user_ids: userIds, statuses },
   })
 }

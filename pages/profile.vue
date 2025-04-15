@@ -22,15 +22,16 @@
         />
         <Button label="Создать организацию" icon="pi pi-plus" size="small" />
       </section>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { VacancyStatus } from "~/types/vacancy"
+
 const { user } = useAuth()
 
-if (!user) {
+if (!user.value) {
   await navigateTo({ name: "auth-login" })
 }
 
@@ -39,6 +40,11 @@ const { data: vacancyListResponse, status: vacancyListStatus } = useVacancyList(
     take: 5,
     skip: 0,
     userIds: [user.value!.id],
+    statuses: [
+      VacancyStatus.ACTIVE,
+      VacancyStatus.PENDING,
+      VacancyStatus.SUSPENDED,
+    ],
   }
 )
 const { data: organizationListResponse, status: organizationListStatus } =

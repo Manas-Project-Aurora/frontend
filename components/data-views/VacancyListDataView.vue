@@ -15,13 +15,17 @@
             <p class="text-md">Компания: {{ vacancy.organization_name }}</p>
           </section>
         </template>
+        <template #footer>
+          <Tag value="Ожидание публикации" severity="warn" v-if="vacancy.status === VacancyStatus.PENDING"/>
+          <Tag value="В архиве" severity="secondary" v-else-if="vacancy.status === VacancyStatus.SUSPENDED"/>
+        </template>
       </Card>
     </template>
   </DataView>
 </template>
 
 <script setup lang="ts">
-import type { VacancyListItem, VacancyListResponse } from "~/types/vacancy"
+import { VacancyStatus, type VacancyListItem, type VacancyListResponse } from "~/types/vacancy"
 
 defineProps<{
   vacancyListResponse: VacancyListResponse
