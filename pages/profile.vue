@@ -8,7 +8,7 @@
       >
         <h4 class="text-xl font-semibold">Ваши последние вакансии</h4>
         <VacancyListDataView :vacancy-list-response="vacancyListResponse!" />
-        <Button label="Создать вакансию" icon="pi pi-plus" size="small" />
+        <Button @click="isVacancyCreateDialogVisible = true" label="Создать вакансию" icon="pi pi-plus" size="small" />
       </section>
 
       <ListItemsSkeleton v-if="organizationListStatus === 'pending'" />
@@ -31,6 +31,9 @@
 
     <OrganizationCreateDialog
       v-model:visible="isOrganizationCreateDialogVisible"
+    />
+    <VacancyCreateDialog
+      v-model:visible="isVacancyCreateDialogVisible"
     />
   </div>
 </template>
@@ -63,4 +66,5 @@ const { data: organizationListResponse, status: organizationListStatus } =
   })
 
 const isOrganizationCreateDialogVisible = ref<boolean>(false)
+const isVacancyCreateDialogVisible = ref<boolean>(false)
 </script>
