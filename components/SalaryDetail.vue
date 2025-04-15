@@ -19,9 +19,9 @@ const salaryRangeText = computed((): string => {
     return `${props.salaryFrom}-${props.salaryTo}`
   }
   if (props.salaryTo !== null && props.salaryFrom === null) {
-    return `от ${props.salaryFrom}`
+    return `до ${props.salaryTo}`
   }
-  return `до ${props.salaryTo}`
+  return `от ${props.salaryFrom}`
 })
 
 const salaryTypeText = computed((): string => {
