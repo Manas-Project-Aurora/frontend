@@ -52,7 +52,6 @@ import type {
   OrganizationListResponse,
   OrganizationListItem,
 } from "~/types/organization"
-import { NuxtLink } from '#components'
 
 defineProps<{
   organizationListResponse: OrganizationListResponse
