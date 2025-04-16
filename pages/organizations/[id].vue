@@ -25,7 +25,7 @@
       </p>
     </div>
   </div>
-  <div v-else-if="pending">
+  <div v-else-if="status">
     <p>Загрузка...</p>
   </div>
   <div v-else-if="error">
@@ -38,5 +38,5 @@ import { useOrganizationDetail } from "~/composables/organization_detail"
 
 const route = useRoute()
 const id = Number(route.params.id)
-const { data: organization, pending, error } = useOrganizationDetail({ id })
+const { data: organization, status, error } = useOrganizationDetail({ id })
 </script>
