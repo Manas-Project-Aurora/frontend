@@ -15,22 +15,30 @@
     <div class="text-sm text-gray-500">
       <p><strong>Тип:</strong> {{ vacancy.type }}</p>
       <p>
-        <strong>Зарплата:</strong> от {{ vacancy.salary_from }} до
-        {{ vacancy.salary_to }} ({{ vacancy.salary_type }})
+        <strong>Зарплата:</strong>
+        <SalaryDetail
+          :salary-from="vacancy.salary_from"
+          :salary-to="vacancy.salary_to"
+          :salary-type="vacancy.salary_type"
+        />
       </p>
       <p><strong>Статус:</strong> {{ vacancy.status }}</p>
     </div>
   </div>
-  <div v-else>
+  <div v-else-if="status === 'pending'">
     <p>Загрузка...</p>
+  </div>
+  <div v-else>
+    <p>Не удалось загрузить вакансию.</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVacancyDetail } from "~/composables/vacancy_detail"
+import SalaryDetail from "~/components/SalaryDetail.vue"
 
 const route = useRoute()
 const id = Number(route.params.id)
 
-const { data: vacancy, pending, error } = useVacancyDetail({ id })
+const { data: vacancy, status, error } = useVacancyDetail({ id })
 </script>
