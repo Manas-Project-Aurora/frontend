@@ -7,7 +7,8 @@ interface VacancyDetailRequestParams {
 export const useVacancyDetail = ({id} : VacancyDetailRequestParams) => {
     const runtimeConfig = useRuntimeConfig();
 
-    const url = `${runtimeConfig.public.apiBaseUrl}/v1/${id}`
+    const url = `${runtimeConfig.public.apiBaseUrl}/v1/vacancies/${id}/`
+    console.log(url);
     return useFetch<VacancyListItem>(url, {
         method: "GET",
         credentials: "include",
