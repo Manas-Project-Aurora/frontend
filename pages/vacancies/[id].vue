@@ -1,6 +1,5 @@
 <template>
   <div v-if="vacancy && organization" class="p-4 space-y-6">
-
     <!-- Вакансия -->
     <Card>
       <template #title>
@@ -86,16 +85,17 @@
   </div>
 
   <div v-else class="p-4 text-center text-gray-400">
-    <p v-if="status">Загрузка...</p>
+    <p v-if="status || orgStatus">Загрузка...</p>
     <p v-else class="text-red-500">Не удалось загрузить вакансию или компанию.</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { OrganizationListItem } from "~/types/organization";
-import { ref, watch } from "vue";
+import { ref, watchEffect } from "vue";
 import { useVacancyDetail } from "~/composables/vacancy_detail";
 import { useOrganizationDetail } from "~/composables/organization_detail";
+import { useRoute } from "vue-router";
 import SalaryDetail from "~/components/SalaryDetail.vue";
 
 const route = useRoute();
@@ -104,14 +104,16 @@ const { data: vacancy, status } = useVacancyDetail({ id });
 
 // Определяем organization как ref, начиная со значения null
 const organization = ref<OrganizationListItem | null>(null);
+const orgStatus = ref(false);
 
 // Следим за изменениями в vacancy и загружаем данные организации, когда они доступны
-watch(vacancy, (newVal) => {
-  const orgId = newVal?.organization_id;
+watchEffect(() => {
+  const orgId = vacancy.value?.organization_id;
   if (orgId) {
     // Получаем детали организации с помощью composable; ожидаем, что он возвращает ref
     const orgDetails = useOrganizationDetail({ id: orgId });
     organization.value = orgDetails.data.value;
+    orgStatus.value = orgDetails.status; // добавили статус для организации
   }
 });
 
