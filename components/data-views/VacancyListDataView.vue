@@ -45,7 +45,6 @@
 
 <script setup lang="ts">
 import { VacancyStatus, type VacancyListItem, type VacancyListResponse } from "~/types/vacancy"
-import { NuxtLink } from '#components'
 
 defineProps<{
   vacancyListResponse: VacancyListResponse
