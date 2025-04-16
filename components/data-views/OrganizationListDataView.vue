@@ -1,13 +1,11 @@
 <template>
   <DataView :value="organizationListResponse.organizations" data-key="id">
-    <template
-      #list="{ items: organizations }: { items: OrganizationListItem[] }"
-    >
+    <template #list="{ items: organizations }: { items: OrganizationListItem[] }">
       <div class="flex flex-col gap-y-4">
-        <RouterLink
+        <NuxtLink
           v-for="organization in organizations"
           :key="organization.id"
-          :to="`/organizations/${organization.id}`"
+          :to="{ name: 'organizations-id', params: { id: organization.id } }"
           class="no-underline"
         >
           <Card
@@ -43,7 +41,7 @@
               </div>
             </template>
           </Card>
-        </RouterLink>
+        </NuxtLink>
       </div>
     </template>
   </DataView>
@@ -54,6 +52,7 @@ import type {
   OrganizationListResponse,
   OrganizationListItem,
 } from "~/types/organization"
+import { NuxtLink } from '#components'
 
 defineProps<{
   organizationListResponse: OrganizationListResponse
