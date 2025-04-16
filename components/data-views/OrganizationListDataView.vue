@@ -9,7 +9,7 @@
           class="no-underline"
         >
           <Card
-            class="transition-transform hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+            class="organization-card transition-transform hover:shadow-lg hover:-translate-y-1 cursor-pointer"
           >
             <template #content>
               <div class="flex justify-between items-start gap-y-4 sm:items-center flex-col sm:flex-row">
@@ -47,6 +47,7 @@
   </DataView>
 </template>
 
+
 <script setup lang="ts">
 import type {
   OrganizationListResponse,
@@ -57,3 +58,9 @@ defineProps<{
   organizationListResponse: OrganizationListResponse
 }>()
 </script>
+
+<style scoped>
+.organization-card:hover {
+  background-color: #222; /* белый при наведении */
+}
+</style>
