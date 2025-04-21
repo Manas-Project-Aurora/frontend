@@ -1,4 +1,8 @@
-import type { VacancyListResponse, VacancyStatus } from "~/types/vacancy"
+import type {
+  VacancyListItem,
+  VacancyListResponse,
+  VacancyStatus,
+} from "~/types/vacancy"
 
 interface VacancyListRequestParams {
   take?: number
@@ -20,5 +24,15 @@ export const useVacancyList = ({
     method: "GET",
     credentials: "include",
     query: { take, skip, user_ids: userIds, statuses },
+  })
+}
+
+export const useVacancyDetail = (id: number) => {
+  const runtimeConfig = useRuntimeConfig()
+
+  const url = `${runtimeConfig.public.apiBaseUrl}/v1/vacancies/${id}/`
+  return useFetch<VacancyListItem>(url, {
+    method: "GET",
+    credentials: "include",
   })
 }

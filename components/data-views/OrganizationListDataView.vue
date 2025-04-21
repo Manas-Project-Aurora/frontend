@@ -1,6 +1,8 @@
 <template>
   <DataView :value="organizationListResponse.organizations" data-key="id">
-    <template #list="{ items: organizations }: { items: OrganizationListItem[] }">
+    <template
+      #list="{ items: organizations }: { items: OrganizationListItem[] }"
+    >
       <div class="flex flex-col gap-y-4">
         <NuxtLink
           v-for="organization in organizations"
@@ -9,10 +11,12 @@
           class="no-underline"
         >
           <Card
-            class="organization-card transition-transform hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+            class="transition-transform hover:shadow-lg hover:-translate-y-1 cursor-pointer"
           >
             <template #content>
-              <div class="flex justify-between items-start gap-y-4 sm:items-center flex-col sm:flex-row">
+              <div
+                class="flex justify-between items-start gap-y-4 sm:items-center flex-col sm:flex-row"
+              >
                 <div class="flex gap-x-4 items-center">
                   <NuxtImg
                     :src="organization.logo_url"
@@ -47,20 +51,13 @@
   </DataView>
 </template>
 
-
 <script setup lang="ts">
 import type {
   OrganizationListResponse,
   OrganizationListItem,
 } from "~/types/organization"
 
-defineProps<{
+const props = defineProps<{
   organizationListResponse: OrganizationListResponse
 }>()
 </script>
-
-<style scoped>
-.organization-card:hover {
-  background-color: #222; /* белый при наведении */
-}
-</style>

@@ -8,7 +8,7 @@
   class="no-underline"
 >
   <Card
-    class="custom-card mb-4 cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
+    class="mb-4 cursor-pointer transition-all hover:bg-gray-300 hover:shadow-lg hover:-translate-y-1"
   >
     <template #title>
       <span class="text-lg">{{ vacancy.title }}</span>
@@ -51,9 +51,3 @@ defineProps<{
   vacancyListResponse: VacancyListResponse
 }>()
 </script>
-
-<style scoped>
-.custom-card:hover {
-  background-color: #222; /* белый фон при hover */
-}
-</style>

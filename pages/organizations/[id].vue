@@ -88,27 +88,21 @@
     </Card>
   </div>
 
-  <div v-else-if="status">
-    <p class="p-6 text-gray-500">Загрузка...</p>
-  </div>
-
   <div v-else-if="error">
     <p class="p-6 text-red-500">Ошибка загрузки данных</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useOrganizationDetail } from "~/composables/organization_detail"
-import { useRoute } from "vue-router"
 import Card from "primevue/card"
 import Divider from "primevue/divider"
-import Avatar from "primevue/avatar"
 
 const route = useRoute()
-const id = Number(route.params.id)
-const { data: organization, status, error } = useOrganizationDetail({ id })
+const organizationId = Number(route.params.id)
+const { data: organization, error } = await useOrganizationDetail(
+  organizationId
+)
 
-// Иконки для типов контактов
 const iconMap: Record<string, string> = {
   email: "pi pi-envelope",
   phone: "pi pi-phone",
@@ -116,7 +110,3 @@ const iconMap: Record<string, string> = {
   website: "pi pi-globe",
 }
 </script>
-
-<style scoped>
-/* Пример, если иконки PrimeVue недоступны — подключи CSS в main.ts */
-</style>

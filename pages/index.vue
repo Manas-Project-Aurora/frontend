@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-const { data: vacanciesPage } = await useVacancyList()
+await navigateTo({ name: "vacancies" })
 </script>
