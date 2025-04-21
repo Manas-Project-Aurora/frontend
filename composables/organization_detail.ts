@@ -7,7 +7,7 @@ interface OrganizationDetailRequestParams {
 export const useOrganizationDetail = ({ id }: OrganizationDetailRequestParams) => {
   const runtimeConfig = useRuntimeConfig();
 
-  const url = `${runtimeConfig.public.apiBaseUrl}/v1/organization/${id}`;
+  const url = `${runtimeConfig.public.apiBaseUrl}/v1/organizations/${id}/`;
   return useFetch<OrganizationListItem>(url, {
     method: "GET",
     credentials: "include",
