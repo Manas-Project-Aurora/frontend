@@ -69,16 +69,16 @@ const items: Item[] = [
     pageName: "vacancies",
     icon: "pi pi-fw pi-home",
   },
-  {
-    label: "Мероприятия",
-    pageName: "events",
-    icon: "pi pi-fw pi-calendar",
-  },
-  {
-    label: "Видео",
-    pageName: "videos",
-    icon: "pi pi-fw pi-video",
-  },
+  // {
+  //   label: "Мероприятия",
+  //   pageName: "events",
+  //   icon: "pi pi-fw pi-calendar",
+  // },
+  // {
+  //   label: "Видео",
+  //   pageName: "videos",
+  //   icon: "pi pi-fw pi-video",
+  // },
   {
     label: "Организации",
     pageName: "organizations",
