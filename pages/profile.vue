@@ -8,7 +8,12 @@
       >
         <h4 class="text-xl font-semibold">Ваши последние вакансии</h4>
         <VacancyListDataView :vacancy-list-response="vacancyListResponse!" />
-        <Button @click="isVacancyCreateDialogVisible = true" label="Создать вакансию" icon="pi pi-plus" size="small" />
+        <Button
+          @click="isVacancyCreateDialogVisible = true"
+          label="Создать вакансию"
+          icon="pi pi-plus"
+          size="small"
+        />
       </section>
 
       <ListItemsSkeleton v-if="organizationListStatus === 'pending'" />
@@ -33,15 +38,19 @@
       v-model:visible="isOrganizationCreateDialogVisible"
     />
     <VacancyCreateDialog
+      @submit="onCreateVacancy"
+      :organizations="organizationListResponse?.organizations ?? []"
       v-model:visible="isVacancyCreateDialogVisible"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { VacancyStatus } from "~/types/vacancy"
+import { VacancyStatus, type VacancyCreateEvent } from "~/types/vacancy"
 
 const { user } = useAuth()
+
+const toast = useToast()
 
 if (!user.value) {
   await navigateTo({ name: "auth-login" })
@@ -67,4 +76,36 @@ const { data: organizationListResponse, status: organizationListStatus } =
 
 const isOrganizationCreateDialogVisible = ref<boolean>(false)
 const isVacancyCreateDialogVisible = ref<boolean>(false)
+
+const runtimeConfig = useRuntimeConfig()
+
+const onCreateVacancy = async (event: VacancyCreateEvent) => {
+  try {
+    await $fetch("/v1/vacancies/", {
+      baseURL: runtimeConfig.public.apiBaseUrl,
+      method: "POST",
+      body: {
+        title: event.title,
+        description: event.description,
+        salary_from: event.salaryFrom,
+        salary_to: event.salaryTo,
+        salary_type: event.salaryType,
+        type: event.type,
+        organization_id: event.organizationId,
+      },
+      credentials: 'include',
+    })
+    toast.add({
+      severity: "success",
+      summary: "Успех",
+      detail: "Вакансия успешно создана. Ожидайте публикации после одобрения модератором",
+    })
+  } catch (error) {
+    toast.add({
+      severity: "error",
+      summary: "Ошибка",
+      detail: "Не удалось создать вакансию",
+    })
+  }
+}
 </script>

@@ -39,3 +39,13 @@ export interface VacancyListResponse {
   vacancies: VacancyListItem[]
   pagination: ApiResponsePagePagination
 }
+
+export interface VacancyCreateEvent {
+  title: string
+  description: string
+  organizationId: number
+  salaryFrom: number | null
+  salaryTo: number | null
+  type: VacancyType
+  salaryType: VacancySalaryType
+}
