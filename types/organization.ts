@@ -31,3 +31,8 @@ export interface OrganizationListResponse {
   organizations: OrganizationListItem[]
   pagination: ApiResponsePagePagination
 }
+
+export interface OrganizationCreateEvent {
+  name: string
+  description: string
+}

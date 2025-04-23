@@ -35,6 +35,7 @@
     </div>
 
     <OrganizationCreateDialog
+      @submit="onCreateOrganization"
       v-model:visible="isOrganizationCreateDialogVisible"
     />
     <VacancyCreateDialog
@@ -46,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import type { OrganizationCreateEvent } from "~/types/organization"
 import { VacancyStatus, type VacancyCreateEvent } from "~/types/vacancy"
 
 const { user } = useAuth()
@@ -79,6 +81,34 @@ const isVacancyCreateDialogVisible = ref<boolean>(false)
 
 const runtimeConfig = useRuntimeConfig()
 
+const onCreateOrganization = async (event: OrganizationCreateEvent) => {
+  try {
+    await $fetch("/v1/organizations/", {
+      baseURL: runtimeConfig.public.apiBaseUrl,
+      method: "POST",
+      body: {
+        name: event.name,
+        description: event.description,
+      },
+      credentials: "include",
+    })
+    toast.add({
+      severity: "success",
+      summary: "Успех",
+      detail:
+        "Организация успешно создана. Ожидайте публикации после одобрения модератором",
+    })
+  } catch (error) {
+    toast.add({
+      severity: "error",
+      summary: "Ошибка",
+      detail: "Не удалось создать организацию",
+    })
+  } finally {
+    isOrganizationCreateDialogVisible.value = false
+  }
+}
+
 const onCreateVacancy = async (event: VacancyCreateEvent) => {
   try {
     await $fetch("/v1/vacancies/", {
@@ -93,12 +123,13 @@ const onCreateVacancy = async (event: VacancyCreateEvent) => {
         type: event.type,
         organization_id: event.organizationId,
       },
-      credentials: 'include',
+      credentials: "include",
     })
     toast.add({
       severity: "success",
       summary: "Успех",
-      detail: "Вакансия успешно создана. Ожидайте публикации после одобрения модератором",
+      detail:
+        "Вакансия успешно создана. Ожидайте публикации после одобрения модератором",
     })
   } catch (error) {
     toast.add({
@@ -106,6 +137,8 @@ const onCreateVacancy = async (event: VacancyCreateEvent) => {
       summary: "Ошибка",
       detail: "Не удалось создать вакансию",
     })
+  } finally {
+    isVacancyCreateDialogVisible.value = false
   }
 }
 </script>

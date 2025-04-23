@@ -34,9 +34,15 @@
 <script setup lang="ts">
 import { z } from "zod"
 import { zodResolver } from "@primevue/forms/resolvers/zod"
+import type { OrganizationCreateEvent } from "~/types/organization"
+import type { FormSubmitEvent } from "@primevue/forms"
 
 const nameFieldId = useId()
 const descriptionFieldId = useId()
+
+const emit = defineEmits<{
+  submit: [event: OrganizationCreateEvent]
+}>()
 
 const resolver = zodResolver(
   z.object({
@@ -51,5 +57,9 @@ const resolver = zodResolver(
   })
 )
 
-const onSubmit = () => {}
+const onSubmit = ({ values, valid }: FormSubmitEvent) => {
+  if (valid) {
+    emit("submit", values as OrganizationCreateEvent)
+  }
+}
 </script>
